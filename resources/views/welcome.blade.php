@@ -1,82 +1,61 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome - {{ config('app.name', 'Laravel') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="text-2xl font-bold text-gray-800">
+                    {{ config('app.name', 'Laravel') }}
+                </div>
 
-@section('title', 'Accueil - InnovQube Reservations')
-
-@section('content')
-<div class="py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Hero Section -->
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-                Trouvez votre 
-                <span class="text-primary">havre de paix</span>
-            </h1>
-            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-                Découvrez nos propriétés exceptionnelles et réservez votre séjour en toute simplicité.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <x-button variant="primary" href="{{ route('properties.index') }}">
-                    Explorer les propriétés
-                </x-button>
-                @auth
-                    <x-button variant="outline" href="{{ route('dashboard') }}">
-                        Mon tableau de bord
-                    </x-button>
-                @else
-                    <x-button variant="secondary" href="{{ route('register') }}">
-                        Créer un compte
-                    </x-button>
-                @endauth
+                <!-- Login/Register Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="{{ route('login') }}" 
+                       class="px-6 py-2 bg-primary text-white rounded-lg font-medium transition-all duration-200 hover:bg-blue-700 hover:shadow-md transform hover:-translate-y-0.5">
+                        Login
+                    </a>
+                    <a href="{{ route('register') }}" 
+                       class="px-6 py-2 bg-secondary text-white rounded-lg font-medium transition-all duration-200 hover:bg-purple-700 hover:shadow-md transform hover:-translate-y-0.5">
+                        Register
+                    </a>
+                </div>
             </div>
         </div>
+    </header>
 
-        <!-- Features Section -->
-        <div class="grid md:grid-cols-3 gap-8 mb-12">
-            <div class="text-center p-6">
-                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl">🔍</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Recherche facile</h3>
-                <p class="text-gray-600">Trouvez la propriété parfaite en quelques clics</p>
-            </div>
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-20">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Welcome</h1>
+            <p class="text-lg text-gray-600">We're glad to have you here</p>
             
-            <div class="text-center p-6">
-                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl">⚡</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Réservation instantanée</h3>
-                <p class="text-gray-600">Réservez en temps réel sans attente</p>
-            </div>
-            
-            <div class="text-center p-6">
-                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl">🛡️</span>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Paiement sécurisé</h3>
-                <p class="text-gray-600">Transactions 100% sécurisées</p>
+            <!-- Additional call-to-action buttons -->
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="{{ route('login') }}" 
+                   class="px-8 py-3 bg-primary text-white rounded-lg font-semibold transition-all duration-200 hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-0.5">
+                    Get Started - Login
+                </a>
+                <a href="{{ route('register') }}" 
+                   class="px-8 py-3 border-2 border-primary text-primary rounded-lg font-semibold transition-all duration-200 hover:bg-primary hover:text-white hover:shadow-lg transform hover:-translate-y-0.5">
+                    Create Account
+                </a>
             </div>
         </div>
+    </main>
 
-        <!-- Properties Preview -->
-        @if($properties->count() > 0)
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-8">Nos propriétés populaires</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($properties->take(3) as $property)
-                    <x-property-card :property="$property">
-                        <x-button variant="primary" size="sm" href="{{ route('properties.index') }}">
-                            Voir plus
-                        </x-button>
-                    </x-property-card>
-                @endforeach
-            </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-auto">
+        <div class="max-w-6xl mx-auto px-4 py-6 text-center text-gray-600">
+            <p>&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</p>
         </div>
-        @endif
-    </div>
-</div>
-@endsection
-
-@php
-    // Récupérer les propriétés pour la préview
-    $properties = App\Models\Property::where('is_available', true)->get();
-@endphp
+    </footer>
+</body>
+</html>

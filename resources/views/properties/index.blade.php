@@ -1,18 +1,18 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Nos propriétés') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Propriétés - InnovQube Reservations')
-
-@section('content')
-<div class="py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Nos propriétés</h1>
-            <p class="text-gray-600">Découvrez notre sélection de propriétés exceptionnelles</p>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <!-- Livewire Component -->
+                    @livewire('booking-manager')
+                </div>
+            </div>
         </div>
-
-        <!-- Livewire Component -->
-        @livewire('booking-manager')
     </div>
-</div>
-@endsection
+</x-app-layout>

@@ -13,12 +13,7 @@ class Property extends Model
     protected $fillable = [
         'name',
         'description',
-        'price_per_night',
-        'address',
-        'guests_count',
-        'bedrooms',
-        'bathrooms',
-        'is_available'
+        'price_per_night'
     ];
 
     public function bookings(): HasMany
