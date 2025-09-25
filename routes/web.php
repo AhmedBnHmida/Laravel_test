@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +20,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/properties', function () {
     return view('properties.index');
 })->name('properties.index');
+
+Route::get('/properties/{id}', [PropertyController::class, 'show'])->name('properties.show');
+
+Route::get('/user', function () {
+    return view('user'); // Ancienne welcome page devenue page utilisateur
+})->name('user.properties');
 
 require __DIR__.'/auth.php';
