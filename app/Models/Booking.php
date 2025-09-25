@@ -11,10 +11,12 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'property_id',
+        'user_id',
         'start_date',
-        'end_date'
+        'end_date',
+        'total_price',
+        'status'
     ];
 
     protected $casts = [
@@ -22,13 +24,13 @@ class Booking extends Model
         'end_date' => 'date',
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

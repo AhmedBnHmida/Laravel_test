@@ -20,6 +20,11 @@
                     <x-nav-link :href="route('properties.index')" :active="request()->routeIs('properties.*')">
                         {{ __('Properties') }}
                     </x-nav-link>
+                    
+                    <x-nav-link href="{{ route('bookings.index') }}" :active="request()->routeIs('bookings.index')">
+                        Mes Réservations
+                    </x-nav-link>
+                
                 </div>
             </div>
 
@@ -79,6 +84,10 @@
             <!-- Bouton pour la liste des propriétés (version mobile) -->
             <x-responsive-nav-link :href="route('properties.index')" :active="request()->routeIs('properties.*')">
                 {{ __('Properties') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('bookings.index')" :active="request()->routeIs('bookings.index')">
+                Mes Réservations
             </x-responsive-nav-link>
         </div>
 

@@ -77,7 +77,7 @@
 
                             <!-- Actions -->
                             <div class="flex space-x-4">
-                                <a href="{{ route('properties.index') }}" 
+                                <a href="#reservation-form" 
                                    class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold">
                                     Réserver maintenant
                                 </a>
@@ -89,41 +89,73 @@
 
                         <!-- Colonne droite - Réservation -->
                         <div class="lg:col-span-1">
-                            <div class="bg-gray-50 rounded-lg p-6 sticky top-4">
+                            <!-- Calendrier compact -->
+    <div class="mb-6">
+        <h3 class="text-lg font-semibold mb-3">Calendrier des disponibilités</h3>
+        <div wire:ignore id="compact-calendar" class="compact-calendar"></div>
+        <div class="mt-3 flex items-center justify-center space-x-4 text-xs">
+            <div class="flex items-center space-x-1">
+                <div class="w-3 h-3 bg-green-100 border border-green-300 rounded"></div>
+                <span>Disponible</span>
+            </div>
+            <div class="flex items-center space-x-1">
+                <div class="w-3 h-3 bg-red-100 border border-red-300 rounded"></div>
+                <span>Réservé</span>
+            </div>
+        </div>
+    </div>
+
+                            <!-- Formulaire de réservation -->
+                            <div id="reservation-form" class="bg-gray-50 rounded-lg p-6 sticky top-4">
                                 <h3 class="text-xl font-semibold mb-4">Réservation rapide</h3>
                                 
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Dates de séjour</label>
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
-                                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+                                <form id="booking-form" action="{{ route('properties.reserve', $property->id) }}" method="POST">
+                                    @csrf
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Dates de séjour</label>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <input type="date" name="start_date" id="start_date" 
+                                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" required>
+                                                <input type="date" name="end_date" id="end_date" 
+                                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" required>
+                                            </div>
+                                            @error('dates')
+                                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                            @enderror
                                         </div>
+
+                                        <!-- Résumé du prix -->
+                                        <div class="border-t pt-4">
+                                            <div class="flex justify-between text-sm mb-2">
+                                                <span id="price-label">{{ $property->price_per_night }} € x <span id="nights">0</span> nuits</span>
+                                                <span id="subtotal">0 €</span>
+                                            </div>
+                                            <div class="flex justify-between text-sm mb-2">
+                                                <span>Frais de service</span>
+                                                <span>Gratuit</span>
+                                            </div>
+                                            <div class="flex justify-between font-semibold border-t pt-2">
+                                                <span>Total</span>
+                                                <span id="total-price" class="text-primary">0 €</span>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" 
+                                                class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold">
+                                            Réserver maintenant
+                                        </button>
+
+                                        <button type="button" id="check-availability" 
+                                                class="w-full border border-primary text-primary py-3 rounded-lg hover:bg-primary hover:text-white transition duration-200 font-semibold">
+                                            Vérifier la disponibilité
+                                        </button>
+
+                                        <p class="text-xs text-gray-500 text-center">
+                                            Aucun frais de réservation • Annulation gratuite sous 24h
+                                        </p>
                                     </div>
-
-                                    <div class="border-t pt-4">
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span>{{ $property->price_per_night }} € x 2 nuits</span>
-                                            <span>{{ $property->price_per_night * 2 }} €</span>
-                                        </div>
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span>Frais de service</span>
-                                            <span>Gratuit</span>
-                                        </div>
-                                        <div class="flex justify-between font-semibold border-t pt-2">
-                                            <span>Total</span>
-                                            <span class="text-primary">{{ $property->price_per_night * 2 }} €</span>
-                                        </div>
-                                    </div>
-
-                                    <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-semibold">
-                                        Vérifier la disponibilité
-                                    </button>
-
-                                    <p class="text-xs text-gray-500 text-center">
-                                        Aucun frais de réservation • Annulation gratuite sous 24h
-                                    </p>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -160,4 +192,236 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/fr.js"></script>
+
+<style>
+    .compact-calendar {
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+    
+    .compact-calendar .fc-header-toolbar {
+        margin-bottom: 0.5rem !important;
+        padding: 0.5rem;
+    }
+    
+    .compact-calendar .fc-toolbar-title {
+        font-size: 0.9rem !important;
+        font-weight: 600;
+    }
+    
+    .compact-calendar .fc-button {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.7rem !important;
+    }
+    
+    .compact-calendar .fc-col-header-cell {
+        font-size: 0.7rem !important;
+        padding: 0.25rem !important;
+        font-weight: 600;
+    }
+    
+    .compact-calendar .fc-daygrid-day {
+        padding: 0.1rem !important;
+        height: 2rem !important;
+    }
+    
+    .compact-calendar .fc-daygrid-day-number {
+        font-size: 0.7rem !important;
+        padding: 0.1rem !important;
+    }
+    
+    .compact-calendar .fc-day-today {
+        background-color: #dbeafe !important;
+    }
+    
+    /* Couleurs pour les dates réservées */
+    .fc-event-reserved {
+        background-color: #fecaca !important;
+        border-color: #f87171 !important;
+        color: #dc2626 !important;
+    }
+    
+    .fc-event-available {
+        background-color: #d1fae5 !important;
+        border-color: #34d399 !important;
+        color: #065f46 !important;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('=== COMPACT CALENDAR INITIALIZATION ===');
+        
+        
+        console.log('Debug: Starting script execution');
+        const unavailableDates = <?php echo json_encode($unavailableDates ?? []); ?>;
+        console.log('unavailableDates:', unavailableDates);
+
+        const pricePerNight = <?php echo json_encode($property->price_per_night ?? 0); ?>;
+        console.log('pricePerNight:', pricePerNight);
+
+        const events = <?php echo json_encode($events ?? []); ?>;
+        console.log('events:', events);
+
+        console.log('Unavailable dates:', unavailableDates);
+        console.log('Events:', events);
+
+        // Initialize Compact Calendar
+        try {
+            const calendarEl = document.getElementById('compact-calendar');
+            console.log('Calendar element:', calendarEl);
+
+            if (!calendarEl) {
+                console.error('Calendar element not found!');
+                return;
+            }
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                headerToolbar: {
+                    left: 'prev',
+                    center: 'title',
+                    right: 'next'
+                },
+                events: events,
+                eventDisplay: 'background',
+                eventColor: '#f87171',
+                eventBackgroundColor: '#fecaca',
+                eventBorderColor: '#f87171',
+                height: 'auto',
+                aspectRatio: 1.2,
+                dayMaxEvents: true,
+                showNonCurrentDates: false,
+                fixedWeekCount: false,
+                dayCellContent: function(info) {
+                    // Rendre les chiffres plus petits
+                    info.dayNumberText = info.dayNumberText.replace('Â', '');
+                    return { html: '<div class="fc-daygrid-day-number">' + info.dayNumberText + '</div>' };
+                },
+                dateClick: function(info) {
+                    console.log('Date clicked:', info.dateStr);
+                    // Mettre à jour le formulaire quand on clique sur une date
+                    const today = new Date();
+                    const clickedDate = new Date(info.dateStr);
+                    
+                    if (clickedDate >= today) {
+                        document.getElementById('start_date').value = info.dateStr;
+                        // Définir la date de fin par défaut (1 nuit)
+                        const endDate = new Date(clickedDate);
+                        endDate.setDate(endDate.getDate() + 1);
+                        document.getElementById('end_date').value = endDate.toISOString().split('T')[0];
+                        
+                        updatePriceCalculation(clickedDate, endDate);
+                    }
+                },
+                eventDidMount: function(info) {
+                    // Style personnalisé pour les événements
+                    if (info.event.title === 'Réservé') {
+                        info.el.style.backgroundColor = '#fecaca';
+                        info.el.style.borderColor = '#f87171';
+                        info.el.style.color = '#dc2626';
+                        info.el.style.fontSize = '0.6rem';
+                        info.el.style.padding = '0px 2px';
+                    }
+                }
+            });
+
+            calendar.render();
+            console.log('Compact Calendar rendered successfully');
+
+        } catch (error) {
+            console.error('Error initializing Compact Calendar:', error);
+        }
+
+        // Reste du code JavaScript pour le formulaire...
+        document.getElementById('start_date').addEventListener('change', updatePrices);
+        document.getElementById('end_date').addEventListener('change', updatePrices);
+        document.getElementById('check-availability').addEventListener('click', checkAvailability);
+
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('start_date').min = today;
+        document.getElementById('end_date').min = today;
+
+        function updatePrices() {
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+            
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                
+                if (end > start) {
+                    updatePriceCalculation(start, end);
+                }
+            }
+        }
+
+        function updatePriceCalculation(start, end) {
+            const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+            const subtotal = nights * pricePerNight;
+            
+            document.getElementById('nights').textContent = nights;
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2) + ' €';
+            document.getElementById('total-price').textContent = subtotal.toFixed(2) + ' €';
+            document.getElementById('price-label').textContent = pricePerNight + ' € x ' + nights + ' nuits';
+        }
+
+        function checkAvailability() {
+            const startDate = document.getElementById('start_date').value;
+            const endDate = document.getElementById('end_date').value;
+            
+            if (!startDate || !endDate) {
+                alert('Veuillez sélectionner des dates');
+                return;
+            }
+
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const today = new Date();
+            
+            if (start < today.setHours(0, 0, 0, 0)) {
+                alert('❌ La date de début ne peut pas être dans le passé');
+                return;
+            }
+            
+            if (end <= start) {
+                alert('❌ La date de fin doit être après la date de début');
+                return;
+            }
+
+            fetch('{{ route("properties.check-availability", $property->id) }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    start_date: startDate,
+                    end_date: endDate
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.available) {
+                    alert('✅ Ces dates sont disponibles! Prix total: ' + data.total_price + ' €');
+                } else {
+                    alert('❌ Ces dates ne sont pas disponibles. Veuillez choisir d\'autres dates.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Erreur lors de la vérification de disponibilité');
+            });
+        }
+
+        console.log('=== COMPACT CALENDAR INITIALIZATION COMPLETE ===');
+    });
+</script>
+@endpush
 </x-app-layout>
