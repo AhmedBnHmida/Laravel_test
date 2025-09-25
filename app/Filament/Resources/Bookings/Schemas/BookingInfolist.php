@@ -19,6 +19,18 @@ class BookingInfolist
                     ->date(),
                 TextEntry::make('end_date')
                     ->date(),
+                TextEntry::make('total_price')
+                    ->money('USD')
+                    ->label('Total Price'),
+                TextEntry::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'confirmed' => 'success',
+                        'cancelled' => 'danger',
+                        'completed' => 'info',
+                        default => 'gray',
+                    }),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

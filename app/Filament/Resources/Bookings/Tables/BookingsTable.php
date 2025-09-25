@@ -25,6 +25,19 @@ class BookingsTable
                 TextColumn::make('end_date')
                     ->date()
                     ->sortable(),
+                TextColumn::make('total_price')
+                    ->money('USD')
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'confirmed' => 'success',
+                        'cancelled' => 'danger',
+                        'completed' => 'info',
+                        default => 'gray',
+                    })
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

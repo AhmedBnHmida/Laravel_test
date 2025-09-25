@@ -20,16 +20,23 @@
                     </div>
 
                     <!-- Image header -->
-                    <div class="relative h-64 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg mb-6 overflow-hidden">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-8xl text-white opacity-90">🏠</span>
-                        </div>
-                        <div class="absolute bottom-4 left-6">
-                            <span class="bg-white text-primary px-4 py-2 rounded-full text-lg font-bold shadow-lg">
-                                {{ $property->price_per_night }} €/nuit
-                            </span>
-                        </div>
-                    </div>
+<div class="relative h-64 rounded-lg mb-6 overflow-hidden">
+    <img src="{{ asset('images/default-property.jpg') }}" 
+         alt="{{ $property->name }}" 
+         class="w-full h-full object-cover"
+         onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br', 'from-blue-400', 'to-purple-600');">
+    
+    <!-- Fallback content if image fails to load -->
+    <div class="absolute inset-0 flex items-center justify-center" style="display: none;">
+        <span class="text-8xl text-white opacity-90">🏠</span>
+    </div>
+    
+    <div class="absolute bottom-4 left-6">
+        <span class="bg-white text-primary px-4 py-2 rounded-full text-lg font-bold shadow-lg">
+            {{ $property->price_per_night }} €/nuit
+        </span>
+    </div>
+</div>
 
                     <!-- Grille principale -->
                     <div class="grid lg:grid-cols-3 gap-8">
@@ -85,17 +92,111 @@
                                     Contacter le propriétaire
                                 </button>
                             </div>
+                            <div class="border rounded-lg p-4 mb-4">
+                                
+                            <!-- Special Offer -->
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-blue-500 text-lg mr-2">⭐</span>
+                                    <span class="font-semibold text-blue-800">Meilleur prix garanti</span>
+                                </div>
+                                <p class="text-sm text-blue-700">
+                                    Trouvez moins cher? Nous ajustons le prix + 10% de réduction!
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 text-center">
+                                
+                                <div class="text-xs">
+                                    <div class="text-lg">💳</div>
+                                    <div>Paiement sécurisé</div>
+                                </div>
+                                <div class="text-xs">
+                                    <div class="text-lg">🛡️</div>
+                                    <div>Garantie annulation</div>
+                                </div>
+                                <div class="text-xs">
+                                    <div class="text-lg">👨‍💼</div>
+                                    <div>Propriétaire vérifié</div>
+                                </div>
+                                <div class="text-xs">
+                                    <div class="text-lg">⭐</div>
+                                    <div>4.8/5 avis</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Customer reviews -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+                            <h3 class="text-lg font-semibold mb-4">Avis des clients ⭐ 4.8/5</h3>
+                            <div class="space-y-4">
+                                <!-- Review 1 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                                        <img src="{{ asset('images/customer1.jpg') }}" alt="Jean Dupont" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <p class="font-semibold text-gray-900">Jean Dupont</p>
+                                            <span class="text-xs text-gray-500">Août 2024</span>
+                                        </div>
+                                        <div class="flex items-center mb-1">
+                                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">"Superbe propriété, très propre et bien située. Nous avons passé un excellent séjour!"</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Review 2 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                                        <img src="{{ asset('images/customer2.jpg') }}" alt="Marie Lambert" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <p class="font-semibold text-gray-900">Marie Lambert</p>
+                                            <span class="text-xs text-gray-500">Juillet 2024</span>
+                                        </div>
+                                        <div class="flex items-center mb-1">
+                                            <span class="text-yellow-400 text-sm">★★★★☆</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">"La piscine était incroyable et la villa très spacieuse. Parfait pour nos vacances en famille!"</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Review 3 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+                                        <img src="{{ asset('images/customer3.jpg') }}" alt="Pierre Moreau" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <p class="font-semibold text-gray-900">Pierre Moreau</p>
+                                            <span class="text-xs text-gray-500">Juin 2024</span>
+                                        </div>
+                                        <div class="flex items-center mb-1">
+                                            <span class="text-yellow-400 text-sm">★★★★★</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">"Cadre magnifique, propriétaire très accueillant. Nous reviendrons certainement l'année prochaine!"</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- View all reviews link -->
+                            <div class="text-center mt-4">
+                                <a href="#" class="text-primary text-sm font-medium hover:underline">Voir tous les avis (12)</a>
+                            </div>
+                        </div>
                         </div>
 
                         <!-- Colonne droite - Réservation -->
-                        <div class="lg:col-span-1">
+                    <div class="lg:col-span-1">
                             <!-- Calendrier compact -->
     <div class="mb-6">
         <h3 class="text-lg font-semibold mb-3">Calendrier des disponibilités</h3>
         <div wire:ignore id="compact-calendar" class="compact-calendar"></div>
         <div class="mt-3 flex items-center justify-center space-x-4 text-xs">
             <div class="flex items-center space-x-1">
-                <div class="w-3 h-3 bg-green-100 border border-green-300 rounded"></div>
+                <div class="w-3 h-3 bg-white border border-gray-300 rounded"></div>
                 <span>Disponible</span>
             </div>
             <div class="flex items-center space-x-1">
@@ -161,14 +262,19 @@
                     </div>
 
                     <!-- Propriétés similaires -->
+                    <!-- Propriétés similaires -->
                     @if($similarProperties->count() > 0)
                     <div class="mt-12 border-t pt-8">
                         <h3 class="text-2xl font-bold mb-6">Propriétés similaires</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             @foreach($similarProperties as $similar)
                             <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition duration-300">
-                                <div class="h-40 bg-gradient-to-br from-blue-400 to-purple-600 relative">
-                                    <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="h-40 relative">
+                                    <img src="{{ asset('images/default-property.jpg') }}" 
+                                        alt="{{ $similar->name }}" 
+                                        class="w-full h-full object-cover"
+                                        onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br', 'from-blue-400', 'to-purple-600');">
+                                    <div class="absolute inset-0 flex items-center justify-center" style="display: none;">
                                         <span class="text-4xl text-white opacity-80">🏠</span>
                                     </div>
                                 </div>
@@ -176,7 +282,7 @@
                                     <h4 class="font-semibold text-gray-900 mb-2 text-sm">{{ Str::limit($similar->name, 40) }}</h4>
                                     <p class="text-primary font-bold text-lg mb-2">{{ $similar->price_per_night }} €/nuit</p>
                                     <a href="{{ route('properties.show', $similar->id) }}" 
-                                       class="text-primary text-sm font-medium hover:underline inline-flex items-center">
+                                    class="text-primary text-sm font-medium hover:underline inline-flex items-center">
                                         Voir détails
                                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

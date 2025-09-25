@@ -1,5 +1,5 @@
 <div>
-    <h2 class="text-3xl font-bold text-gray-900 mb-8">Propriétés disponibles</h2>
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">Propriétés</h2>
 
     <div class="grid grid-cols-3 gap-6">
         @foreach($properties as $property)

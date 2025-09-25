@@ -20,8 +20,8 @@ class PropertyController extends Controller
         $events = []; // Initialize events array
 
         foreach ($property->bookings as $booking) {
-            // Only consider confirmed or pending bookings for availability
-            if ($booking->status === 'confirmed') {
+            // Only consider confirmed bookings for availability
+           if ($booking->status === 'confirmed') {
                 try {
                     $period = \Carbon\CarbonPeriod::create($booking->start_date, $booking->end_date);
                     foreach ($period as $date) {
