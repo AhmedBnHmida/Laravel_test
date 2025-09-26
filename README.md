@@ -1,5 +1,35 @@
 # 🏠 InnovQube - Système de Gestion de Réservations Immobilières
 
+
+---
+
+## Table des matières
+
+- [📋 Description du Projet](#-description-du-projet)
+- [🎯 Fonctionnalités Implémentées](#-fonctionnalités-implémentées)
+  - [👥 Espace Utilisateur](#-espace-utilisateur)
+  - [🔐 Espace Administration](#-espace-administration)
+  - [⚡ Technologies Modernes](#-technologies-modernes)
+- [🛠️ Stack Technique](#-stack-technique)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [Administration](#administration)
+- [📦 Installation et Démarrage](#-installation-et-démarrage)
+- [🌐 Accès à l’Application](#-accès-à-lapplication)
+- [🏗️ Architecture du Projet](#-architecture-du-projet)
+- [📊 Modèles de Données](#-modèles-de-données)
+- [🎨 Personnalisation](#-personnalisation)
+- [🚀 Déploiement en Production](#-déploiement-en-production)
+- [🧪 Tests et Qualité](#-tests-et-qualité)
+- [🔧 Dépannage](#-dépannage)
+- [📝 Journal de Développement](#-journal-de-développement)
+- [🤝 Guide de Contribution](#-guide-de-contribution)
+- [📞 Support](#-support)
+- [📄 Licence](#-licence)
+
+
+---
+
 ## 📋 Description du Projet
 
 Application web développée avec **Laravel** pour la gestion de réservations immobilières. Cette plateforme permet aux utilisateurs de découvrir des propriétés disponibles et de faire des réservations, tandis que les administrateurs peuvent gérer l'ensemble du contenu via une interface dédiée.
@@ -33,6 +63,8 @@ Application web développée avec **Laravel** pour la gestion de réservations i
 - **Gestion des réservations** - Suivi des bookings
 - **Interface intuitive** - Gestion facile du contenu
 
+![Panel Filament](public/docs/screenshots/filament_admin_panel.png)
+
 ### ⚡ Technologies Modernes
 - **Composants Livewire** - Interactivité en temps réel
 - **TailwindCSS** - Design system utilitaire
@@ -56,7 +88,7 @@ Application web développée avec **Laravel** pour la gestion de réservations i
 
 ### 🔐 Espace Administration
 - **Panel Filament** - Interface d'administration moderne  
-  ![Panel Filament](public/docs/screenshots/filament_admin_panel.png)
+
 
 ## 📦 Installation et Démarrage
 
