@@ -128,10 +128,12 @@ laravel-test/
 │   │   ├── Property.php          # Modèle propriété
 │   │   └── Booking.php           # Modèle réservation
 │   ├── Http/
-│   │   ├── Controllers/
-│   │   │   └── PropertyController.php
-│   │   └── Livewire/
-│   │       └── BookingManager.php # Composant réservation
+│   │   └── Controllers/
+│   │       ├── PropertyController.php
+│   │       └── BookingController.php
+│   ├──── Livewire/
+│   │       ├── BookingManager.php # Composant réservation
+│   │       └── calender.php 
 │   └── Filament/
 │       └── Resources/            # Resources admin
 ├── database/
@@ -141,6 +143,7 @@ laravel-test/
 │   ├── views/
 │   │   ├── layouts/              # Layouts Blade
 │   │   ├── properties/           # Vues propriétés
+│   │   ├── bookings/             # Vues réservations
 │   │   └── livewire/             # Vues Livewire
 │   └── css/                      # Styles Tailwind
 └── routes/
