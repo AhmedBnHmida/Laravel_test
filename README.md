@@ -15,16 +15,16 @@ Application web développée avec **Laravel** pour la gestion de réservations i
 - **Design responsive** - Compatible mobile, tablette et desktop
 - **Landing page split-screen** - Navigation intuitive Admin/User  
 
-- ![Landing page split-screen](/readme/landing_page.png)
+- ![Landing page split-screen](public/docs/screenshots/landing_page.png)
 
 - **Consultation des propriétés** - Grid responsive avec cartes  
-  ![Consultation des propriétés](/readme/property_grid.png)
+  ![Consultation des propriétés](public/docs/screenshots/property_grid.png)
 
 - **Pages de détails** - Informations complètes avec système de réservation  
-  ![Page de détails](/readme/property_details.png)
+  ![Page de détails](public/docs/screenshots/property_details.png)
 
 - **Design responsive** - Compatible mobile, tablette et desktop  
-  ![Design responsive](/readme/responsive_design.png)
+  ![Design responsive](public/docs/screenshots/responsive_design.png)
 
 
 ### 🔐 Espace Administration
@@ -53,6 +53,10 @@ Application web développée avec **Laravel** pour la gestion de réservations i
 
 ### Administration
 - **Filament** - Panel admin moderne et intuitif
+
+### 🔐 Espace Administration
+- **Panel Filament** - Interface d'administration moderne  
+  ![Panel Filament](public/docs/screenshots/filament_admin_panel.png)
 
 ## 📦 Installation et Démarrage
 
