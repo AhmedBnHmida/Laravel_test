@@ -64,12 +64,12 @@ Configuration base de données
 
 2. **Configuration base de données**
 
-# Créer la base de données MySQL
+**Créer la base de données MySQL**
 ```bash
 mysql -u root -p -e "CREATE DATABASE laravel_test;"
 ```
 
-# Configurer .env
+**Configurer .env**
 
 ```bash
 DB_CONNECTION=mysql
@@ -103,21 +103,21 @@ php artisan serve
 ## 🌐 Accès à l'Application
 ### URLs principales
 
-**Landing Page** : http://localhost:8000/
+- **Landing Page** : http://localhost:8000/
 
-**Espace Utilisateur** : http://localhost:8000/user
+- **Espace Utilisateur** : http://localhost:8000/user
 
-**Administration** : http://localhost:8000/admin
+- **Administration** : http://localhost:8000/admin
 
-**API Properties** : http://localhost:8000/properties
+- **API Properties** : http://localhost:8000/properties
 
 ### Comptes de test
 
 Après exécution des seeders :
 
-**Admin** : admin@innovqube.com / password
+- **Admin** : admin@innovqube.com / password
 
-**Utilisateur standard** : Peut s'inscrire via le formulaire
+- **Utilisateur standard** : Peut s'inscrire via le formulaire
 
 ## 🏗️ Architecture du Projet
 
@@ -165,16 +165,18 @@ laravel-test/
 - property_id (Foreign Key) # Référence à la propriété
 - start_date (date)       # Date de début
 - end_date (date)         # Date de fin
+- total_price (decimal)   # Prix total du séjour
+- status (string)         # Statut de la réservation
 - timestamps
 ```
 
 ### Relations
 
-**User** has many **Bookings**
+- **User** has many **Bookings**
 
-**Property** has many **Bookings**
+- **Property** has many **Bookings**
 
-**Booking** belongs to **User and Property**
+- **Booking** belongs to **User and Property**
 
 ## 🎨 Personnalisation
 ### Palette de couleurs
@@ -192,11 +194,11 @@ colors: {
 
 **BookingManager** - Gère l'affichage et l'interaction des propriétés :
 
-Liste des propriétés
+- Liste des propriétés
 
-Modal de réservation
+- Modal de réservation
 
-Calcul des prix en temps réel
+- Calcul des prix en temps réel
 
 ## 🚀 Déploiement en Production
 ### Préparation
@@ -291,43 +293,43 @@ php artisan db:seed --class=PropertySeeder
 ## 📝 Journal de Développement
 ### Commit 1 : Initialisation
 
-Configuration Laravel avec Breeze
+- Configuration Laravel avec Breeze
 
-Système d'authentification
+- Système d'authentification
 
 ### Commit 2 : Modèles et Migrations
 
-Création des models Property et Booking
+- Création des models Property et Booking
 
-Relations Eloquent et schéma de base
+- Relations Eloquent et schéma de base
 
 ### Commit 3 : Interface Utilisateur
 
-Layout principal avec TailwindCSS
+- Layout principal avec TailwindCSS
 
-Composants Blade réutilisables
+- Composants Blade réutilisables
 
-Design system cohérent
+- Design system cohérent
 
 ### Commit 4 : Composants Dynamiques
 
-Intégration de Livewire
+- Intégration de Livewire
 
-Composant BookingManager interactif
+- Composant BookingManager interactif
 
 ### Commit 5 : Administration
 
-Panel Filament pour la gestion
+- Panel Filament pour la gestion
 
-CRUD complet des propriétés
+- CRUD complet des propriétés
 
 ### Commit 6 : Expérience Utilisateur
 
-Landing page split-screen
+- Landing page split-screen
 
-Pages de détails enrichies
+- Pages de détails enrichies
 
-Système de réservation
+- Système de réservation
 
 ## 🤝 Guide de Contribution
 
@@ -345,9 +347,9 @@ Système de réservation
 
 Pour toute question concernant ce projet :
 
-Email : rh@innovqube.com
+- Email : rh@innovqube.com
 
-Documentation : [Lien vers la documentation technique]
+- Documentation : [Lien vers la documentation technique]
 
 ## 📄 Licence
 
